@@ -27,6 +27,29 @@ BCD     = $08       ; Where the BCD results are stored (packed across two bytes)
 
     .org RST_VEC
 
+; Equivalent binary search algorithm in C (for comparison):
+
+; int bin_search(int x, int* arr, int n) {
+;    
+;    int low = 0;
+;    int high = n - 1;
+;    int mid;
+;
+;    while (low <= high) {
+;       mid = low + (high - low) / 2;
+;
+;        if (x < arr[mid]) {
+;            high = mid - 1;
+;        } else if (x > arr[mid]) {
+;            low = mid + 1;
+;        } else {
+;            return mid;
+;        }
+;    }
+;
+;    return -1;
+;} 
+
 main:
     jsr lcd_config_b    ; Configure the display for two line mode
     
@@ -42,9 +65,9 @@ main:
 
     jsr disp_bcd_3_digit    ; Display the converted BCD.
 
-    jsr stall
+    jsr stall           ; Stall to allow the result to be seen.
 
-    jmp main        
+    jmp main            ; Repeat forever.
 
 ; Configure the display settings - clear display, set to two line mode.
 lcd_config_b:
@@ -69,6 +92,7 @@ stall:
     rts
 
 delay:
+    ; Decrement the x register until it is 0.
     dex
     cpx #0
     bne delay
@@ -84,6 +108,7 @@ write_string:
     rts
 
 line_break:
+    ; Go to the next line on the display.
     lda #%11000000
     sta DISP_INST
 
@@ -109,13 +134,14 @@ bin_search:
     lda #0
     sta LOW
 
+    ; Begin iterating the search loop.
     jsr search_iter
 
     rts
 
 search_iter:
 
-    ; Debugging 
+    ; Display an arrow for each iteration.
     lda #%00111110
     sta DISP_CHAR
 
@@ -130,7 +156,7 @@ search_iter:
     adc LOW     ; Add LOW back into the A register.
 
     tax         ; Transfer the midpoint value to the X register.
-    lda HEAP_ADDR, x    ; Get the relevant value in X.
+    lda HEAP_ADDR, x    ; Get the relevant character to compare to.
 
     cmp TARGET
     beq found       ; The value has been found.
