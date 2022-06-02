@@ -52,4 +52,8 @@ hello:
 	lda #"!"
 	sta DISP_CHAR
 
-	jmp disp_config
+	jmp stall
+
+stall:
+	nop
+	jmp stall
