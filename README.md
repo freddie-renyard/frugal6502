@@ -36,7 +36,8 @@ Below is the memory map for the current design of the computer.
 
 # Photo
 
-![6502 Hello World] (images/hello_world.jpg) 
+![6502 Hello World] (https://github.com/freddie-renyard/frugal6502/images/hello_world.jpg) 
+
 # References
 
 The amazing Ben Eater series on the 6502 inspired this project; it can be found here: https://www.youtube.com/watch?v=LnzuMJLZRdU&list=PLowKtXNTBypFbtuVMUVXNR0z1mu7dp7eH
