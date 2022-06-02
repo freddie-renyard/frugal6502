@@ -15,15 +15,23 @@ The full computer fits across two double breadboards. Expensive ICs were removed
 Below is the memory map for the current design of the computer.
 
 `0x0000 - 0x00FF` Zero-page general purpose memory
+
 `0x0100 - 0x01FF` Stack
+
 `0x0200 - 0x7FF9` Program memory / General purpose memory
+
 `0x7FFA - 0x7FFF` Illegal - mirrored vector addresses
 
 `0x8000 - 0x8001` Display Data Write
+
 `0x8002 - 0xBFFF` Unused I/O
+
 `0xC000 - 0xFFF9` Illegal - mirrored program addresses
+
 `0xFFFA - 0xFFFB` Non-maskable Interrupt Vector
+
 `0xFFFC - 0xFFFD` Reset Vector
+
 `0xFFFE - 0xFFFF` Interrupt Request/Break Vector
 
 # References
