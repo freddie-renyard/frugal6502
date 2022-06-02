@@ -36,7 +36,7 @@ Below is the memory map for the current design of the computer.
 
 # Photo
 
-![6502 Hello World] (images/hello_world.jpg?raw=true "hello world") 
+![6502 Hello World](images/hello_world.jpg) 
 
 # References
 
