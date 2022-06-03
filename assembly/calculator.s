@@ -16,6 +16,12 @@ RESULT = $04
 BIN = $10
 BCD = $11
 
+; CALCULATOR OPERANDS
+OP1 = $20
+OP2 = $21
+OP3 = $22
+OP4 = $24
+
     .org RST_VEC
 
 main:
@@ -24,22 +30,52 @@ main:
     ldy #0
     jsr disp_string      ; Display the calculation to be performed
 
-    ldy TEXT_OFFSET
     jsr line_break
-
-    ;jsr inv_dabble
 
     ldy #TEXT_OFFSET
     jsr disp_string
+
+    jsr perform_calc
     
-    lda #63
-    sta RESULT
+    ;jsr inv_dabble
 
     lda RESULT
     jsr BINBCD8
     jsr disp_bcd_3_digit
 
     jmp stall
+
+perform_calc:
+    ; Perform the calculation in the string.
+    ldy #0
+
+    ; Get the first operand in the string.
+    lda HEAP_ADDR, y
+
+    sbc #$30 ; subtract the offset.
+
+    ; HERE: check that the number is between 0 and 9. Add a number and check the carry!!
+    clc
+    adc #246
+    bcc store_bcd_1
+    jmp eval_digit_2
+
+eval_digit_2:
+
+    rts
+
+store_bcd_1:
+    lda HEAP_ADDR, y
+    sbc #$30 ; subtract the offset.
+    sta BCD
+    sta RESULT ; Debug
+    jmp eval_digit_2
+
+store_bcd_2:
+    nop
+
+store_bcd_3:
+    nop
 
 disp_string:
     ; Displays the string whose first character is pointed to by the y register.
@@ -210,7 +246,7 @@ stall:
 
 ; Constant memory pool declaration
     .org HEAP_ADDR
-    .byte "23 3 +", $00
+    .byte "33 3 +", $00
 
     .org (HEAP_ADDR + TEXT_OFFSET)
     .byte "Result: ", $00
