@@ -40,7 +40,7 @@ Below is the memory map for the current design of the computer.
 
 # Schematic 
 
-![6502 Rev 1.0 Schematic](schematic/Schematic_Rev1.0.png)
+![6502 Rev 1.1 Schematic](schematic/Schematic_Rev1.1.png)
 
 # References
 
