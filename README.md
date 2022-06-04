@@ -38,6 +38,10 @@ Below is the memory map for the current design of the computer.
 
 ![6502 Hello World](images/hello_world.jpg) 
 
+# Schematic 
+
+![6502 Rev 1.0 Schematic](schematic/Schematic_Rev1.0.png)
+
 # References
 
 The amazing Ben Eater series on the 6502 inspired this project; it can be found here: https://www.youtube.com/watch?v=LnzuMJLZRdU&list=PLowKtXNTBypFbtuVMUVXNR0z1mu7dp7eH
